@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이노플레이스 | 미용실을 직접 운영하며, 디자이너의 데이터를 지키는 기술을 만듭니다</title>
+<meta name="description" content="이노플레이스는 세종에서 공유미용실 '마드모아젤' 4개 지점을 직접 운영하는 뷰티 데이터 플랫폼 기업입니다. 현장에서 검증한 운영 노하우를 디자이너를 위한 SaaS로 확장하고 있습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --org:#FF5A1F;--org-d:#E8460A;--org-l:#FFF0E8;--org-l2:#FFF8F4;
+  --ink:#17161A;--ink-2:#3D3A42;--gray:#6E6A75;--gray-l:#9A96A2;
+  --line:#E9E7EC;--bg:#fff;--bg-2:#F6F5F7;--dark:#1A181C;
+  --max:1180px;--r:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',-apple-system,system-ui,sans-serif;color:var(--ink);background:var(--bg);
+  line-height:1.75;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:104px 0}
+.center{text-align:center}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.24em;color:var(--org);
+  text-transform:uppercase;margin-bottom:16px}
+h2.st{font-size:clamp(25px,3.2vw,38px);font-weight:700;line-height:1.45;letter-spacing:-.035em;margin-bottom:16px}
+h2.st .o{color:var(--org)}
+p.sd{font-size:15.5px;color:var(--gray);line-height:1.9}
+.mb56{margin-bottom:54px}
+.cnt{font:inherit!important;color:inherit!important;display:inline!important;letter-spacing:inherit!important}
+
+/* TOP BAR */
+.topbar{background:var(--dark);color:rgba(255,255,255,.55);font-size:12.5px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;height:36px}
+.topbar b{color:rgba(255,255,255,.85);font-weight:500}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+.logo .mark{width:21px;height:21px;background:var(--org);border-radius:5px;position:relative;flex:none}
+.logo .mark::after{content:'';position:absolute;inset:6px 6px auto auto;width:7px;height:7px;background:#fff;border-radius:2px}
+.logo b{font-size:17.5px;font-weight:900;letter-spacing:.02em}
+.gnb{display:flex;gap:32px}
+.gnb a{text-decoration:none;color:var(--ink-2);font-size:15px;font-weight:500;position:relative;padding:6px 0}
+.gnb a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--org);transition:.28s}
+.gnb a:hover{color:var(--ink)}.gnb a:hover::after{width:100%}
+.burger{display:none;background:none;border:0;font-size:20px;cursor:pointer;color:var(--ink);padding:6px}
+
+/* HERO */
+.hero{padding:96px 0 104px;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,#FFF3EB 0%,#FFF8F4 44%,#fff 100%)}
+.hero::after{content:'';position:absolute;top:-170px;right:-120px;width:660px;height:660px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,31,.15),rgba(255,90,31,0) 66%)}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-size:clamp(29px,4.4vw,50px);font-weight:700;line-height:1.38;letter-spacing:-.045em;margin-bottom:24px}
+.hero h1 .o{color:var(--org)}
+.hero p{font-size:clamp(14.5px,1.5vw,16.5px);color:var(--ink-2);line-height:2;max-width:700px}
+.hero .kicker{margin-top:34px;display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:var(--gray);
+  background:#fff;border:1px solid var(--line);border-radius:99px;padding:9px 18px}
+.hero .kicker i{font-style:normal;width:6px;height:6px;border-radius:50%;background:var(--org);flex:none}
+
+/* STAT STRIP */
+.strip{background:var(--dark);color:#fff;padding:42px 0}
+.strip .wrap{display:grid;grid-template-columns:repeat(5,1fr)}
+.strip div{text-align:center;border-right:1px solid rgba(255,255,255,.12);padding:6px 10px}
+.strip div:last-child{border-right:0}
+.strip b{display:block;font-size:clamp(21px,2.7vw,31px);font-weight:700;letter-spacing:-.04em;line-height:1.25}
+.strip b i{font-style:normal;font-size:.6em;font-weight:500;margin-left:2px}
+.strip span{display:block;font-size:12.5px;color:rgba(255,255,255,.5);margin-top:7px}
+
+/* STORY */
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+.ch{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;display:flex;flex-direction:column}
+.ch .cn{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--org);padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+.ch .sm{font-size:13px;color:var(--gray-l);margin-bottom:6px}
+.ch h3{font-size:19.5px;font-weight:700;letter-spacing:-.03em;line-height:1.5;margin-bottom:18px}
+.ch p{font-size:14px;color:var(--gray);line-height:1.9}
+.fail{background:#F6F5F7;border-radius:8px;padding:14px 16px;margin-top:14px}
+.fail .t{font-size:14px;font-weight:700;margin-bottom:2px}
+.fail .d{font-size:12px;color:var(--gray-l);margin-bottom:10px}
+.fail .q{background:var(--ink);color:#fff;border-radius:6px;padding:11px 56px 11px 13px;font-size:13px;line-height:1.65;position:relative;min-height:56px;display:flex;align-items:center}
+.fail .q em{font-style:normal;position:absolute;right:11px;top:10px;font-size:10.5px;background:rgba(255,255,255,.16);padding:2px 7px;border-radius:3px;line-height:1.5}
+.ch .now{margin-top:auto;padding-top:18px}
+.ch .now b{display:block;font-size:15px;font-weight:700;color:var(--org-d);background:var(--org-l);padding:12px 14px;border-radius:6px;text-align:center;line-height:1.6}
+
+/* PROBLEM CARDS */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.sc{border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;background:#fff;transition:.3s}
+.sc:hover{border-color:var(--org);box-shadow:0 8px 24px rgba(255,90,31,.07);transform:translateY(-3px)}
+.sc .lbl{font-size:12.5px;color:var(--gray-l);margin-bottom:10px}
+.sc b{display:block;font-size:clamp(23px,2.7vw,30px);font-weight:700;letter-spacing:-.04em;line-height:1.2}
+.sc b i{font-style:normal;font-size:.58em;font-weight:500;color:var(--gray);margin-left:2px}
+.sc.hot b{color:var(--org)}
+.sc p{font-size:12.8px;color:var(--gray);margin-top:10px;line-height:1.75}
+.src{font-size:12px;color:var(--gray-l);margin-top:22px}
+
+/* BUSINESS */
+.biz{background:var(--bg-2)}
+.biz-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:22px}
+.biz-head{padding:30px 34px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;justify-content:space-between}
+.biz-head h3{font-size:24px;font-weight:700;letter-spacing:-.035em;margin-bottom:8px}
+.biz-head p{font-size:14.5px;color:var(--gray);line-height:1.85;max-width:640px}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 11px;border-radius:4px;margin-bottom:12px}
+.b-run{background:#EAF6EE;color:#1E7A45}
+.b-dev{background:var(--org-l);color:var(--org-d)}
+.biz-body{padding:28px 34px 34px}
+.f5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.f5 div{background:var(--bg-2);border-radius:8px;padding:18px 14px;text-align:center}
+.f5 b{display:block;font-size:14.5px;font-weight:700;margin-bottom:5px}
+.f5 span{font-size:12px;color:var(--gray-l);line-height:1.65}
+.devline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:6px;position:relative}
+.devline::before{content:'';position:absolute;top:11px;left:9%;right:9%;height:2px;background:var(--line)}
+.dv{text-align:center;position:relative;padding-top:0}
+.dv .dot{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--line);margin:0 auto 14px;position:relative;z-index:2;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray-l)}
+.dv.done .dot{background:var(--org);border-color:var(--org);color:#fff}
+.dv.now .dot{background:#fff;border-color:var(--org);color:var(--org)}
+.dv .dt{font-size:12px;color:var(--gray-l);margin-bottom:4px}
+.dv .tt{font-size:14px;font-weight:700;line-height:1.5;margin-bottom:4px}
+.dv .ss{font-size:11.5px;color:var(--gray-l)}
+.dv.done .ss{color:var(--org-d);font-weight:600}
+.notice{margin-top:26px;background:var(--org-l2);border:1px solid #F8DCCB;border-radius:8px;padding:15px 18px;font-size:13.2px;color:var(--ink-2);line-height:1.8}
+.notice b{color:var(--org-d)}
+.biz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.biz-stats div{background:var(--bg-2);border-radius:8px;padding:20px 14px;text-align:center}
+.biz-stats b{display:block;font-size:24px;font-weight:700;letter-spacing:-.04em;line-height:1.2}
+.biz-stats b i{font-style:normal;font-size:.6em;font-weight:500;margin-left:1px}
+.biz-stats span{display:block;font-size:12px;color:var(--gray-l);margin-top:6px}
+
+/* SHOPS */
+.shops{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.shop{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+.shop .ph{aspect-ratio:4/3;background:linear-gradient(135deg,#EDE8E3,#D6CCC3 55%,#C0B4AA);position:relative}
+.shop .ph em{position:absolute;left:12px;top:12px;font-style:normal;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.35);padding:4px 9px;border-radius:4px}
+.shop .in{padding:18px 20px 20px}
+.shop b{display:block;font-size:16px;font-weight:700;margin-bottom:5px}
+.shop span{font-size:12.8px;color:var(--gray-l);line-height:1.7}
+
+/* HISTORY */
+.hist{background:var(--bg-2)}
+.hl{margin-top:52px;border-top:1px solid var(--line)}
+.hl-row{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:26px 0;border-bottom:1px solid var(--line);align-items:start}
+.hl-row .yr{font-size:22px;font-weight:700;letter-spacing:-.03em;color:var(--org)}
+.hl-row .yr small{display:block;font-size:12px;color:var(--gray-l);font-weight:400;letter-spacing:0;margin-top:2px}
+.hl-row ul{list-style:none}
+.hl-row li{font-size:15px;color:var(--ink-2);padding:5px 0 5px 16px;position:relative;line-height:1.8}
+.hl-row li::before{content:'';position:absolute;left:0;top:15px;width:5px;height:5px;border-radius:50%;background:var(--gray-l)}
+.hl-row li b{font-weight:700;color:var(--ink)}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:22px;margin-top:52px;align-items:start}
+.ceo{background:#fff;border:1px solid var(--line);border-left:3px solid var(--org);border-radius:0 var(--r) var(--r) 0;padding:30px 30px}
+.ceo h3{font-size:25px;font-weight:700;letter-spacing:-.03em}
+.ceo .rl{font-size:13px;color:var(--org);font-weight:600;margin-bottom:20px}
+.ceo .cr{border-top:1px solid var(--line)}
+.ceo .cr div{display:grid;grid-template-columns:52px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.ceo .cr em{font-style:normal;color:var(--gray-l);font-weight:600}
+.ceo .cr span{color:var(--ink-2);line-height:1.7}
+.ceo .note{margin-top:18px;background:var(--bg-2);padding:15px 17px;border-radius:8px;font-size:13px;color:var(--ink-2);line-height:1.85}
+.org{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 28px}
+.org h4{font-size:16px;font-weight:700;margin-bottom:4px}
+.org .oh{font-size:12.5px;color:var(--gray-l);margin-bottom:20px}
+.og{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.og div{border:1px solid var(--line);border-radius:8px;padding:16px 12px;text-align:center;transition:.25s}
+.og div:hover{border-color:var(--org);background:var(--org-l2)}
+.og b{display:block;font-size:14px;font-weight:700;margin-bottom:4px}
+.og b i{font-style:normal;color:var(--org);margin-left:3px}
+.og span{font-size:11.8px;color:var(--gray-l);line-height:1.6}
+.og .wide{grid-column:span 3;text-align:left;padding:16px 18px}
+.insu{margin-top:18px;font-size:12.8px;color:var(--gray-l);border-top:1px dashed var(--line);padding-top:16px;line-height:1.8}
+
+/* CREDENTIALS */
+.cred{background:var(--bg-2)}
+.cg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.cd{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 22px;text-align:center;transition:.3s}
+.cd:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(23,22,26,.06)}
+.cd .ic{width:50px;height:50px;border-radius:50%;background:var(--org-l);color:var(--org);display:flex;align-items:center;
+  justify-content:center;font-size:17px;font-weight:700;margin:0 auto 15px}
+.cd b{display:block;font-size:15.5px;font-weight:700;margin-bottom:6px}
+.cd span{font-size:12.5px;color:var(--gray-l);line-height:1.7}
+
+/* OVERVIEW + CONTACT */
+.ov{background:var(--dark);color:#fff}
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.ov h2{font-size:clamp(23px,2.9vw,32px);font-weight:700;letter-spacing:-.035em;line-height:1.5;margin-bottom:14px}
+.ov .lead{font-size:14.5px;color:rgba(255,255,255,.55);line-height:1.95}
+table.ovt{width:100%;border-collapse:collapse}
+table.ovt th,table.ovt td{padding:15px 0;font-size:14px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;vertical-align:top}
+table.ovt th{width:120px;color:rgba(255,255,255,.42);font-weight:500}
+table.ovt td{color:rgba(255,255,255,.9);line-height:1.75}
+table.ovt tr:last-child th,table.ovt tr:last-child td{border-bottom:0}
+table.ovt a{color:var(--org);text-decoration:none}
+table.ovt a:hover{text-decoration:underline}
+
+/* FOOTER */
+footer{background:#131215;color:rgba(255,255,255,.42);padding:56px 0 32px;font-size:13px;border-top:1px solid rgba(255,255,255,.07)}
+.f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.09)}
+.f-brand .logo b{color:#fff}
+.f-brand p{margin-top:15px;line-height:1.9;font-size:12.8px;max-width:300px}
+.f-col h5{color:#fff;font-size:13.5px;font-weight:700;margin-bottom:14px}
+.f-col a{display:block;color:rgba(255,255,255,.42);text-decoration:none;padding:5px 0;font-size:12.8px}
+.f-col a:hover{color:var(--org)}
+.f-legal{padding-top:24px;font-size:12px;color:rgba(255,255,255,.3);line-height:2}
+.f-legal .lk{margin-bottom:10px}
+.f-legal .lk a{color:rgba(255,255,255,.55);text-decoration:none;margin-right:16px;font-weight:500}
+.f-legal .lk a:hover{color:var(--org)}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:1024px){
+  .story-grid,.shops,.cg,.g4{grid-template-columns:repeat(2,1fr)}
+  .team-grid,.ov-grid{grid-template-columns:1fr;gap:34px}
+  .strip .wrap{grid-template-columns:repeat(3,1fr);gap:20px 0}
+  .strip div:nth-child(3){border-right:0}
+  .f5,.devline{grid-template-columns:repeat(3,1fr);gap:14px}
+  .devline::before{display:none}
+}
+@media(max-width:820px){
+  section{padding:72px 0}
+  .gnb{position:fixed;top:106px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:8px 24px 18px;
+    border-bottom:1px solid var(--line);box-shadow:0 14px 30px rgba(0,0,0,.07);transform:translateY(-140%);
+    transition:.4s cubic-bezier(.16,1,.3,1)}
+  .gnb.open{transform:none}
+  .gnb a{padding:13px 0;border-bottom:1px solid var(--line);width:100%}
+  .burger{display:block}
+  .hl-row{grid-template-columns:1fr;gap:8px}
+  .f-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .biz-head,.biz-body{padding-left:24px;padding-right:24px}
+}
+@media(max-width:560px){
+  .story-grid,.shops,.cg,.g4,.f5,.devline,.og,.biz-stats,.f-grid{grid-template-columns:1fr}
+  .og .wide{grid-column:span 1}
+  .strip .wrap{grid-template-columns:repeat(2,1fr)}
+  .strip div{border-right:0;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>주식회사 이노플레이스 · 공유미용실 마드모아젤</span>
+    <span><b>044-867-5783</b></span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap hd">
+    <a href="#top" class="logo"><span class="mark"></span><b>INNOPLACE</b></a>
+    <nav class="gnb" id="gnb">
+      <a href="#story">브랜드 스토리</a>
+      <a href="#biz">사업영역</a>
+      <a href="#shops">지점 안내</a>
+      <a href="#history">연혁</a>
+      <a href="#team">조직</a>
+      <a href="#cred">인증·특허</a>
+      <a href="#info">회사 정보</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="메뉴">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow rv">Beauty Data Platform</span>
+    <h1 class="rv">미용실을 직접 운영하며,<br><span class="o">디자이너의 데이터를 지키는 기술</span>을 만듭니다</h1>
+    <p class="rv">이노플레이스는 2021년 세종에서 공유미용실 ‘마드모아젤’을 시작해 현재 4개 지점을 직접 운영하고 있습니다.<br>매장에 종속되던 디자이너의 고객 데이터를 개인의 자산으로 되돌리는 일을 하고 있습니다.</p>
+    <span class="kicker rv"><i></i>2021년 설립 · 세종 4개 직영 지점 · 임직원 20명 · 프리랜서 디자이너 40명</span>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div><b>2021</b><span>설립</span></div>
+    <div><b><span class="cnt" data-to="28">0</span><i>억</i></b><span>누적 매출</span></div>
+    <div><b><span class="cnt" data-to="4">0</span><i>개</i></b><span>직영 지점</span></div>
+    <div><b><span class="cnt" data-to="40">0</span><i>명</i></b><span>소속 프리랜서 디자이너</span></div>
+    <div><b><span class="cnt" data-to="20">0</span><i>명</i></b><span>임직원</span></div>
+  </div>
+</div>
+
+<!-- STORY -->
+<section id="story">
+  <div class="wrap">
+    <div class="center mb56 rv">
+      <span class="eyebrow">Our Story</span>
+      <h2 class="st">두 번의 폐업에서 배운 <span class="o">‘데이터 소유’</span>의 중요성,<br>직접 창업해 증명하고 있습니다</h2>
+      <p class="sd">우리는 남의 플랫폼 위에서 사업을 하다 무너져 본 경험이 있습니다.<br>그 경험이 지금 이노플레이스가 하는 일의 출발점입니다.</p>
+    </div>
+    <div class="story-grid rv">
+      <div class="ch">
+        <span class="cn">CHAPTER 1</span>
+        <p class="sm">통신 유통에서 두 번의 실패</p>
+        <h3>나만의 데이터 없이는<br>지속성이 어렵다</h3>
+        <div class="fail">
+          <p class="t">에이치커뮤니케이션</p>
+          <p class="d">휴대폰 도소매 · 개인 · 2012–2015</p>
+          <p class="q">내 고객을 직접 소유하지 않으면 생존 불가<em>교훈</em></p>
+        </div>
+        <div class="fail">
+          <p class="t">(주)엠앤에이치</p>
+          <p class="d">LG유플러스 대리점 · 법인 · 2014–2016</p>
+          <p class="q">플랫폼(통신사)이 바뀌면 내가 쌓은 건 0이 된다<em>교훈</em></p>
+        </div>
+      </div>
+      <div class="ch">
+        <span class="cn">CHAPTER 2</span>
+        <p class="sm">전환점이 된 가족의 미용실 폐업</p>
+        <h3>‘고객 데이터’ 단절로 고통받는<br>헤어 디자이너들을 만났습니다</h3>
+        <p>폐업한 뒤 가족이 운영하던 개인 미용실도 문을 닫는 것을 봤습니다. 이유가 놀라울 정도로 같았습니다.</p>
+        <p style="margin-top:12px">업종이 통신이든 미용이든, 자기 데이터와 고객 관계를 소유하지 못하면 같은 결말이었습니다.</p>
+      </div>
+      <div class="ch">
+        <span class="cn">CHAPTER 3</span>
+        <p class="sm">그래서 직접 미용실을 창업했습니다</p>
+        <h3>3년간 현장에서 검증하고,<br>지금도 매일 운영하고 있습니다</h3>
+        <p>2021년 세종에서 공유미용실 ‘마드모아젤’을 직접 창업했습니다. 현장에서 디자이너들이 겪는 문제를 3년 동안 직접 확인한 뒤, 그 해법을 시스템으로 설계하고 있습니다.</p>
+        <div class="now"><b>누적 매출 28억 · 세종 4개 지점 운영 중</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center mb56 rv">
+      <span class="eyebrow">Why It Matters</span>
+      <h2 class="st">매년 <span class="o">4.7만 명</span>의 디자이너가<br>고객 데이터를 잃습니다</h2>
+      <p class="sd">리뷰도, 단골 고객도, 포트폴리오도 전부 매장에 남습니다.<br>이직하는 순간 쌓아 온 경력이 숫자로 증명되지 않는 구조입니다.</p>
+    </div>
+    <div class="g4 rv">
+      <div class="sc">
+        <span class="lbl">전국 프리랜서 헤어 디자이너</span>
+        <b><span class="cnt" data-to="16.2" data-dec="1">0</span><i>만 명</i></b>
+        <p>전원이 데이터 초기화 딜레마에 놓여 있습니다</p>
+      </div>
+      <div class="sc">
+        <span class="lbl">디자이너 평균 이직 주기</span>
+        <b>평균 <span class="cnt" data-to="2.3" data-dec="1">0</span><i>년</i></b>
+        <p>2~3년마다 고객 관계가 리셋됩니다</p>
+      </div>
+      <div class="sc hot">
+        <span class="lbl">매년 데이터를 잃는 디자이너</span>
+        <b>연 <span class="cnt" data-to="4.7" data-dec="1">0</span><i>만 명</i></b>
+        <p>이직·창업 과정에서 축적한 자산을 두고 떠납니다</p>
+      </div>
+      <div class="sc">
+        <span class="lbl">연간 미용실 폐업 수</span>
+        <b>연평균 <span class="cnt" data-to="1">0</span><i>만 개소</i></b>
+        <p>폐업 시 소속 디자이너 전원이 강제 초기화됩니다</p>
+      </div>
+    </div>
+    <p class="src rv">출처 : 통계청 「서비스업조사」, 고용노동부 「사업체노동력조사」, 미용사 면허 등록 기준 활동 인원, 자사 디자이너 40명 인터뷰</p>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section class="biz" id="biz">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">Business</span>
+      <h2 class="st">오프라인에서 검증하고,<br>온라인으로 확장합니다</h2>
+      <p class="sd">직접 운영하는 매장이 곧 우리가 만드는 시스템의 실사용 검증 무대입니다.</p>
+    </div>
+
+    <!-- 1) 마드모아젤 -->
+    <div class="biz-card rv">
+      <div class="biz-head">
+        <div>
+          <span class="badge b-run">● 운영 중</span>
+          <h3>공유미용실 ‘마드모아젤’</h3>
+          <p>세종 4개 지점을 직접 운영하는 공유미용실 브랜드입니다. 디자이너에게 좌석과 브랜드 인프라를 제공하고, 매장 운영·행정·마케팅은 본사가 맡습니다. 디자이너는 시술에만 집중합니다.</p>
+        </div>
+      </div>
+      <div class="biz-body">
+        <div class="biz-stats">
+          <div><b><span class="cnt" data-to="4">0</span><i>개</i></b><span>세종 직영 지점</span></div>
+          <div><b><span class="cnt" data-to="40">0</span><i>명</i></b><span>소속 프리랜서 디자이너</span></div>
+          <div><b><span class="cnt" data-to="28">0</span><i>억</i></b><span>누적 매출</span></div>
+          <div><b><span class="cnt" data-to="15">0</span><i>명</i></b><span>현장 운영 인력</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2) SaaS -->
+    <div class="biz-card rv">
+      <div class="biz-head">
+        <div>
+          <span class="badge b-dev">● 개발 진행 중</span>
+          <h3>디자이너를 위한 데이터 플랫폼</h3>
+          <p>디자이너가 이직하거나 창업해도 포트폴리오·고객 관계·리뷰가 따라가는 구조를 만들고 있습니다. 현재 사내 디자이너 40명을 대상으로 시제품을 시범 운영하며 기능을 다듬는 단계입니다.</p>
+        </div>
+      </div>
+      <div class="biz-body">
+        <div class="devline">
+          <div class="dv done"><span class="dot">✓</span><p class="dt">2025.09</p><p class="tt">요구사항 분석</p><p class="ss">완료</p></div>
+          <div class="dv done"><span class="dot">✓</span><p class="dt">2025.11</p><p class="tt">데이터베이스 설계</p><p class="ss">완료</p></div>
+          <div class="dv done"><span class="dot">✓</span><p class="dt">2025.12</p><p class="tt">UI·UX 프로토타입</p><p class="ss">완료</p></div>
+          <div class="dv now"><span class="dot">●</span><p class="dt">2026</p><p class="tt">사내 40명 시범 운영</p><p class="ss">진행 중</p></div>
+          <div class="dv"><span class="dot">·</span><p class="dt">2026.10</p><p class="tt">웹 플랫폼 v1</p><p class="ss">오픈 예정</p></div>
+        </div>
+
+        <div class="f5" style="margin-top:34px">
+          <div><b>포트폴리오</b><span>시술 사진 자동 아카이빙<br>스타일 태그·검색</span></div>
+          <div><b>고객 관리</b><span>고객·리뷰 수집 기록<br>재방문 알림</span></div>
+          <div><b>세무·행정</b><span>매출·비용 자동 정리<br>세무 상담 연계</span></div>
+          <div><b>브랜딩</b><span>개인 프로필 페이지<br>실적 리포트</span></div>
+          <div><b>매출 관리</b><span>실시간 매출 확인<br>일·주·월 리포트</span></div>
+        </div>
+
+        <div class="notice">
+          <b>개발 중인 서비스입니다.</b> 위 기능은 현재 사내 시범 운영 단계이며, 정식 공개 시점과 제공 범위는 개발 진행 상황에 따라 달라질 수 있습니다. 외부 가입 신청은 아직 받고 있지 않습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOPS -->
+<section id="shops">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">Salon</span>
+      <h2 class="st">세종에서 4개 지점을<br>직접 운영하고 있습니다</h2>
+      <p class="sd">모든 지점은 본사가 직접 운영합니다. 위탁이나 가맹이 아닌 직영 구조입니다.</p>
+    </div>
+    <div class="shops rv">
+      <div class="shop">
+        <div class="ph"><em>1호점</em></div>
+        <div class="in"><b>마드모아젤 세종본점</b><span>세종특별자치시 한누리대로 291<br>포레뷰 2차 2층 · 10:00–20:00</span></div>
+      </div>
+      <div class="shop">
+        <div class="ph"><em>2호점</em></div>
+        <div class="in"><b>마드모아젤 나성2호점</b><span>세종특별자치시 한누리대로 253<br>에스빌딩 2층 · 10:00–20:00</span></div>
+      </div>
+      <div class="shop">
+        <div class="ph"><em>3호점</em></div>
+        <div class="in"><b>마드모아젤 3호점</b><span>세종특별자치시<br>주소 확인 중</span></div>
+      </div>
+      <div class="shop">
+        <div class="ph"><em>4호점</em></div>
+        <div class="in"><b>마드모아젤 4호점</b><span>세종특별자치시<br>주소 확인 중</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="hist" id="history">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">History</span>
+      <h2 class="st">연혁</h2>
+    </div>
+    <div class="hl rv">
+      <div class="hl-row">
+        <div class="yr">2026<small>현재</small></div>
+        <ul>
+          <li>산업통상자원부 <b>규제 샌드박스(실증특례) 승인</b> — 한 사업장 내 다수 독립 디자이너의 활동 근거 마련</li>
+          <li>중소벤처기업부 <b>재도전 성공패키지</b> 재창업자 선정 절차 진행</li>
+          <li>디자이너 데이터 연속성 관련 <b>특허 2건 출원</b></li>
+          <li>사내 디자이너 40명 대상 <b>시제품 시범 운영</b> 개시</li>
+        </ul>
+      </div>
+      <div class="hl-row">
+        <div class="yr">2025</div>
+        <ul>
+          <li>데이터 플랫폼 요구사항 분석 및 데이터베이스 설계 완료</li>
+          <li>디자이너 대시보드·포트폴리오 관리 화면 UI·UX 프로토타입 제작</li>
+        </ul>
+      </div>
+      <div class="hl-row">
+        <div class="yr">2024</div>
+        <ul>
+          <li>마드모아젤 <b>세종 4개 지점 체제</b> 완성</li>
+          <li>(주)림에퐁당 이사 겸직 — 외식 프랜차이즈 운영 경험 확장</li>
+        </ul>
+      </div>
+      <div class="hl-row">
+        <div class="yr">2021</div>
+        <ul>
+          <li><b>주식회사 이노플레이스 설립</b> — 이미용 프랜차이즈 가맹본부</li>
+          <li>세종 1호점 오픈, 공유미용실 브랜드 ‘마드모아젤’ 시작</li>
+        </ul>
+      </div>
+      <div class="hl-row">
+        <div class="yr">2012<small>~2016</small></div>
+        <ul>
+          <li>에이치커뮤니케이션(휴대폰 도소매), (주)엠앤에이치(LG유플러스 대리점) 운영</li>
+          <li>두 차례의 폐업 경험 — ‘데이터 소유’ 문제 인식의 출발점</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">Team</span>
+      <h2 class="st"><span class="o">20명</span>이 이미 매일 일하고 있습니다</h2>
+      <p class="sd">오프라인 운영 조직과 온라인 개발 조직이 한 회사 안에 있습니다.</p>
+    </div>
+    <div class="team-grid">
+      <div class="ceo rv">
+        <h3>이 훈 표</h3>
+        <p class="rl">대표이사</p>
+        <div class="cr">
+          <div><em>2024</em><span>(주)림에퐁당 이사 — 외식 프랜차이즈 (현재)</span></div>
+          <div><em>2021</em><span>(주)이노플레이스 설립 — 이미용 프랜차이즈 가맹본부 (현재)</span></div>
+          <div><em>2014</em><span>(주)엠앤에이치 — LG유플러스 대리점 운영</span></div>
+          <div><em>2012</em><span>에이치커뮤니케이션 — 휴대폰 도소매</span></div>
+        </div>
+        <p class="note"><b>핵심 역량</b> · 프랜차이즈 운영과 제품 기획, 그리고 두 차례의 창업·폐업 경험에서 얻은 사업 구조 설계력.</p>
+      </div>
+      <div class="org rv">
+        <h4>조직 구성</h4>
+        <p class="oh">2026년 3월 기준 · 임직원 20명</p>
+        <div class="og">
+          <div><b>SV <i>1</i></b><span>슈퍼바이저<br>매장 운영·조직 관리</span></div>
+          <div><b>점장 <i>1</i></b><span>지점 현장 관리<br>수익 관리</span></div>
+          <div><b>개발 <i>1</i></b><span>플랫폼 기획<br>로직 설계</span></div>
+          <div><b>디자인 <i>1</i></b><span>모션 디자이너<br>AE·C4D</span></div>
+          <div><b>교육 <i>1</i></b><span>디자이너 온보딩<br>전 지점 인력 관리</span></div>
+          <div><b>현장 <i>15</i></b><span>세종 4개 지점<br>운영 인력</span></div>
+          <div class="wide"><b>조직 구조 · 투트랙</b><span>오프라인 운영(현재 운영 중) + 온라인 플랫폼(구축 중) 을 대표이사 직속으로 병행 운영하며, UI·UX와 핵심 기능 개발 일부는 외부 파트너와 협업합니다.</span></div>
+        </div>
+        <p class="insu">4대 사회보험 가입자 <b style="color:var(--ink)">31명</b> 확인 (2026. 3. 3. 기준) · 프리랜서 디자이너 40명은 별도 개인사업자로 활동합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="cred" id="cred">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">Credentials</span>
+      <h2 class="st">인증과 제도적 기반</h2>
+      <p class="sd">규제의 문턱을 먼저 넘었고, 기술은 권리로 확보하고 있습니다.</p>
+    </div>
+    <div class="cg rv">
+      <div class="cd">
+        <div class="ic">法</div>
+        <b>규제 샌드박스 승인</b>
+        <span>산업통상자원부<br>실증을 위한 규제 특례 (2026)</span>
+      </div>
+      <div class="cd">
+        <div class="ic">中</div>
+        <b>재도전 성공패키지</b>
+        <span>중소벤처기업부<br>재창업 지원 사업</span>
+      </div>
+      <div class="cd">
+        <div class="ic">IP</div>
+        <b>특허 출원 2건</b>
+        <span>디자이너 데이터 연속성 기술<br>2026년 출원</span>
+      </div>
+      <div class="cd">
+        <div class="ic">4</div>
+        <b>직영 4개 지점</b>
+        <span>세종 기반 오프라인 검증<br>디자이너 40명</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW / INFO -->
+<section class="ov" id="info">
+  <div class="wrap">
+    <div class="ov-grid">
+      <div class="rv">
+        <span class="eyebrow">Company</span>
+        <h2>미용실 현장에서 나온 문제를<br>미용실 현장에서 풉니다</h2>
+        <p class="lead">이노플레이스는 책상에서 설계한 솔루션을 미용실에 파는 회사가 아닙니다. 매일 4개 지점을 운영하며 마주치는 불편을 그대로 제품으로 옮기는 것이 우리의 방식입니다.</p>
+      </div>
+      <div class="rv">
+        <table class="ovt">
+          <tr><th>회사명</th><td>주식회사 이노플레이스</td></tr>
+          <tr><th>대표이사</th><td>이훈표</td></tr>
+          <tr><th>설립</th><td>2021년</td></tr>
+          <tr><th>사업 분야</th><td>공유미용실 운영 · 이미용 프랜차이즈 가맹본부<br>뷰티 데이터 플랫폼 개발</td></tr>
+          <tr><th>브랜드</th><td>마드모아젤 (Mademoiselle)</td></tr>
+          <tr><th>주소</th><td>세종특별자치시 한누리대로 291 포레뷰 2차 2층</td></tr>
+          <tr><th>대표전화</th><td>044-867-5783</td></tr>
+          <tr><th>이메일</th><td><a href="mailto:contact@innoplace.co.kr">contact@innoplace.co.kr</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a href="#top" class="logo"><span class="mark"></span><b>INNOPLACE</b></a>
+        <p>공유미용실을 직접 운영하며, 디자이너의 데이터를 개인의 자산으로 되돌리는 뷰티 데이터 플랫폼 기업입니다.</p>
+      </div>
+      <div class="f-col">
+        <h5>회사</h5>
+        <a href="#story">브랜드 스토리</a>
+        <a href="#history">연혁</a>
+        <a href="#team">조직</a>
+        <a href="#cred">인증·특허</a>
+      </div>
+      <div class="f-col">
+        <h5>사업</h5>
+        <a href="#biz">사업영역</a>
+        <a href="#shops">지점 안내</a>
+      </div>
+      <div class="f-col">
+        <h5>안내</h5>
+        <a href="#info">회사 정보</a>
+        <a href="mailto:contact@innoplace.co.kr">이메일 문의</a>
+      </div>
+    </div>
+    <div class="f-legal">
+      <div class="lk">
+        <a href="#">이용약관</a><a href="#" style="color:#fff">개인정보처리방침</a><a href="#">이메일무단수집거부</a>
+      </div>
+      상호 주식회사 이노플레이스 &nbsp;|&nbsp; 대표이사 이훈표 &nbsp;|&nbsp; 사업자등록번호 000-00-00000<br>
+      주소 세종특별자치시 한누리대로 291 포레뷰 2차 2층 &nbsp;|&nbsp; 대표전화 044-867-5783 &nbsp;|&nbsp; 이메일 contact@innoplace.co.kr<br>
+      © 2026 INNOPLACE Inc. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+var gnb=document.getElementById('gnb'),burger=document.getElementById('burger');
+burger.addEventListener('click',function(){gnb.classList.toggle('open');burger.textContent=gnb.classList.contains('open')?'✕':'☰';});
+gnb.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){gnb.classList.remove('open');burger.textContent='☰';});});
+
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+function run(el){
+  var to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0',10),st=null,dur=1300;
+  function s(ts){if(!st)st=ts;var p=Math.min((ts-st)/dur,1),e=1-Math.pow(1-p,3),v=to*e;
+    el.textContent=dec?v.toFixed(dec):Math.floor(v);if(p<1)requestAnimationFrame(s);}
+  requestAnimationFrame(s);
+}
+var io2=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){run(e.target);io2.unobserve(e.target);}});
+},{threshold:.6});
+document.querySelectorAll('.cnt').forEach(function(el){io2.observe(el);});
+</script>
+</body>
+</html>
